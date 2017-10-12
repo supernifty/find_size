@@ -30,10 +30,10 @@ def find(dir, include, exclude):
        for filename in files:
            # add file size to the extension dictionary item, instead of add 1 
            try:
-               if args.include is not None and re.search(args.include, filename) is None:
+               if include is not None and re.search(include, filename) is None:
                    skipped += 1
                    continue
-               if args.exclude is not None and re.search(args.exclude, filename) is not None:
+               if exclude is not None and re.search(exclude, filename) is not None:
                    skipped += 1
                    continue
 
@@ -54,12 +54,13 @@ def find(dir, include, exclude):
 
     sys.stdout.write('TOTAL,%s,%i\n' % (human(total), count))
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='find total file sizes by extension')
     parser.add_argument('--dir', default='.', help='')
     parser.add_argument('--include', required=False, help='only include files matching pattern')
     parser.add_argument('--exclude', required=False, help='exclude files matching pattern')
     parser.add_argument('--verbose', action='store_true', default=False, help='more logging')
+
     args = parser.parse_args()
 
     if args.verbose:
@@ -68,3 +69,6 @@ if __name__ == '__main__':
         logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.INFO)
 
     find(args.dir, args.include, args.exclude)
+
+if __name__ == '__main__':
+    main()

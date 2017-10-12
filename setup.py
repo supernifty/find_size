@@ -14,7 +14,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     entry_points={
         'console_scripts': [
-            'find_size = find_size.main:main',
+            'find_size = find_size.find_size:main',
         ],
     },
     install_requires=[
